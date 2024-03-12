@@ -1,0 +1,28 @@
+"""QuizBrain Class that has 2 functions and the init function. More explained in main.py."""
+# Notes to self: self.q_number and self.q_list is done to tap into later on in next_question and still has questions.
+
+
+class QuizBrain:
+    def __init__(self, q_list):
+        self.q_number = 0
+        self.q_list = q_list
+        self.q_score = 0
+
+    def next_question(self):
+        current_question = self.q_list[self.q_number]
+        self.q_number += 1
+        user_answer = input(f"Q. {self.q_number}: {current_question.text} (True/False)?: ")
+        self.check_answer(user_answer, current_question.answer)
+
+    def still_has_questions(self):
+        return self.q_number < len(self.q_list)
+
+    def check_answer(self, user_answer, correct_answer):
+        if user_answer.lower() == correct_answer.lower():
+            print("That's correct!")
+            self.q_score += 1
+        else:
+            print("That's wrong.")
+        print(f"The correct answer is {correct_answer}")
+        print(f"Your current score is: {self.q_score}/{self.q_number}")
+        print("\n")
