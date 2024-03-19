@@ -1,0 +1,52 @@
+import random
+from turtle import Turtle
+
+cars = []
+COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+STARTING_MOVE_DISTANCE = 5
+MOVE_INCREMENT = 10
+Number_Of_Cars = 0
+Max_Cars = 30
+Starting_Spawn_Chance = 0.3
+
+
+class CarManager:
+    def __init__(self):
+        self.cars = []
+        self.move_distance = STARTING_MOVE_DISTANCE
+        self.max_cars = Max_Cars
+        self.spawn_chance = Starting_Spawn_Chance
+
+    def spawn_car(self):
+        """Spawns cars only if they are below the max cars (starts at 30)
+        then it generates a number from 0 to 1 and if it's above the spawn chance, then they spawn."""
+        if len(self.cars) < self.max_cars and random.uniform(0, 1) < self.spawn_chance:
+            new_car = Turtle("square")
+            new_car.shapesize(stretch_len=2, stretch_wid=1)
+            new_car.color(random.choice(COLORS))
+            new_car.penup()
+            new_car.goto(270, random.randint(-240, 270))
+            self.cars.append(new_car)
+
+    def move_car(self):
+        for car in self.cars:
+            car.backward(self.move_distance)
+
+    def delete_car(self):
+        for car in list(self.cars):
+            if car.xcor() < -300:
+                car.hideturtle()
+                self.cars.remove(car)
+
+    def clear_cars(self):
+        for car in list(self.cars):
+            car.hideturtle()
+            self.cars.remove(car)
+
+    def increase_speed(self):
+        self.move_distance += MOVE_INCREMENT
+        print(f"Car Move Distance: {self.move_distance}")
+
+    def increase_spawn_rate(self):
+        self.spawn_chance += 0.1
+        print(f"Spawn Chance: {self.spawn_chance}")
