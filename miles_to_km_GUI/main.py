@@ -5,22 +5,23 @@ window = Tk()
 window.title("Mile to Km Convertor")
 window.minsize(width=500, height= 300)
 window.config(padx=50, pady=50)
+window.config(bg="#ADD8E6")  # Set light blue background color
 
 # Entry box to convert miles to km. User can type immediately without clicking on the box with focus().
-miles_entry = Entry()
-miles_entry.grid(row= 0, column= 1)
+miles_entry = Entry(window, bg="white", fg="black", font=("Times New Roman", 12))
+miles_entry.grid(row=0, column=1, padx=10, pady=10)
 miles_entry.focus()
 
 # Miles label next to it
-miles_label = Label(window, text="Miles", font=("Times New Roman", 10 , "normal"))
+miles_label = Label(window, text="Miles", font=("Times New Roman", 12, "bold"), bg="#ADD8E6")
 miles_label.grid(row = 0, column= 2)
 
 # is equal to label...
-is_equal_to_label = Label(window, text="is equal to", font=("Times New Roman", 10 , "normal"))
+is_equal_to_label = Label(window, text="is equal to", font=("Times New Roman", 12 , "normal"), bg="#ADD8E6")
 is_equal_to_label.grid(row = 1, column= 0)
 
 # Label to display converted value
-converted_label = Label(window, text="", font=("Times New Roman", 10, "normal"))
+converted_label = Label(window, text="", font=("Times New Roman", 12, "normal"))
 converted_label.grid(row=1, column=1)
 
 # Button actions below...
@@ -53,4 +54,3 @@ clear_button.grid(row=2, column=2)
 
 
 window.mainloop()
-
