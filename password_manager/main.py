@@ -6,6 +6,7 @@ import string
 # Constants
 Number_Of_Chars = 5
 
+# Note: You might have to change your file path to reflect the directory on your computer to the absolute or relative path.
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 password_bank = []
