@@ -2,11 +2,12 @@ import random
 from tkinter import *
 from tkinter import messagebox
 import string
+import pyperclip
+import json
 
 # Constants
 Number_Of_Chars = 5
 
-# Note: You might have to change your file path to reflect the directory on your computer to the absolute or relative path.
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 password_bank = []
@@ -31,6 +32,7 @@ def generate_new_password():
     password_entry.delete(0, END)
     new_password = generate_password()
     password_entry.insert(0, new_password)
+    pyperclip.copy(new_password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -39,29 +41,60 @@ def save_entries():
     website = website_entry.get()
     username = email_or_username_entry.get()
     password = password_entry.get()
-
-    is_ok = False
+    new_data = {
+        website: {
+            "email": username,
+            "password": password,
+        }
+    }
 
     # Asks the user if it is okay to save their password and username/email.
-    if len(website) > 0 and len(password) > 0:
-        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \n"
-                                                              f"Email/username: {username}\nPassword: {password} "
-                                                              f"\nIs it okay to save?")
-
-    else:
+    if len(website) == 0 and len(password) == 0:
         # Warning that one of the fields is blank.
-        warning_message = messagebox.showwarning(title="Error", message="Incorrect: Website or Password is too short.")
+        messagebox.showwarning(title="Error", message="Incorrect: Website or Password is too short.")
+    else:
+        try:
+            # Writes the entries into a new or existing document called saved_passwords.
+            with open("saved_info.json", "r") as password_list:
+                # Read old data
+                data = json.load(password_list)
+        except FileNotFoundError:
+            data = {}
 
-    if is_ok:
-        # Writes the entries into a new or existing document called saved_passwords.
-        with open("saved_passwords", "a") as password_list:
-            password_list.write(f"Website: {website}\n")
-            password_list.write(f"  Username: {username}\n")
-            password_list.write(f"  Password: {password}\n\n")
+        # Updating old data with new data
+        data.update(new_data)
+
+        # Write back to the file with the new entry
+        with open("saved_info.json", "w") as password_list:
+            # Dump it in the file.
+            json.dump(data, password_list, indent=4)
 
         # Delete the entries in the UI after
         website_entry.delete(0, END)
         password_entry.delete(0, END)
+
+# ---------------------------- Searching for Password ------------------------------- #
+
+
+def find_password():
+    website = website_entry.get()
+    try:
+        with open("saved_info.json", "r") as password_list:
+            data = json.load(password_list)
+            if website in data:
+                password = data[website]["password"]
+                email = data[website]["email"]
+                messagebox.showinfo(title="Info", message=f"Your Email is: {email}.\nYour Password is: {password}\n"
+                                                          f"I'll put fill it in below so you can copy it.")
+                password_entry.insert(index=0, string=password)
+            elif len(website) == 0:
+                messagebox.showerror(title="Error", message="Please enter a website.")
+            else:
+                messagebox.showerror(title="Error", message=f"'{website}' was not found.")
+    except FileNotFoundError:
+        messagebox.showwarning(title="Error", message="No Data File Found!")
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 
@@ -104,6 +137,9 @@ generate_password_button.grid(row=3, column=2)
 
 add_button = Button(text="Add", width=36, command=save_entries)
 add_button.grid(row=4, column=1, columnspan=2)
+
+search_button = Button(text="Search", command=find_password)
+search_button.grid(row=1, column=2)
 
 
 window.mainloop()
