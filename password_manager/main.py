@@ -48,7 +48,6 @@ def save_entries():
         }
     }
 
-    # Asks the user if it is okay to save their password and username/email.
     if len(website) == 0 and len(password) == 0:
         # Warning that one of the fields is blank.
         messagebox.showwarning(title="Error", message="Incorrect: Website or Password is too short.")
@@ -77,6 +76,8 @@ def save_entries():
 
 
 def find_password():
+    """Imports the user's entry as website and uses that it to check the 'data' file.
+    If the website exists, the password is shown in a dialogue box and filled in, in the entry box."""
     website = website_entry.get()
     try:
         with open("saved_info.json", "r") as password_list:
