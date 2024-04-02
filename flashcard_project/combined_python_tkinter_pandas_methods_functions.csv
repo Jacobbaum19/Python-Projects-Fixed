@@ -1,0 +1,28 @@
+Category,Function/Method,Description
+Native Python,with open(...) as ...,Open a file and ensure it's properly closed after its suite finishes.
+Native Python,list.append(),Add an item to the end of the list.
+Native Python,str.split(),Split a string into a list where each word is a list item.
+Native Python,for item in iterable:,Iterate over items of a sequence (such as a list or string).
+Tkinter,tkinter.Tk(),Create a new Tkinter window.
+Tkinter,widget.pack(),"Arrange widgets in a block, which can then be packed into the window."
+Tkinter,widget.grid(),Place widgets in a grid layout within the window.
+Tkinter,widget.focus(),Allows the user to start typing right away.
+Tkinter,"widget.insert(index, string)",Inserts a piece of text in the entry box.
+Tkinter,canvas.itemconfig(),Config methods but for items on the canvas like text.
+Tkinter,widget.bind(),Bind a function to a widget event.
+pandas,df.name,To get or set the name of a Series or DataFrame Object.
+pandas,df.index(),Used to modify or access the index of a Series of Dataframe
+pandas,df.merge(),Merge Dataframes based on a common column.
+pandas,df.fillna(),Fills missing values with a specified value.
+pandas,df.value_counts(),Counts the number of occurrences of values.
+pandas,"df.drop(index, inplace=True or False)",Method to drop specified labels from rows or columns in a Dataframe. Inplace changes the Dataframe.
+pandas,df.isna,Detects missing values in a DataFrame.
+pandas,df.shape,Returns the number of rows and columns.
+pandas,df.tail,Returns the last few rows of a DateFrame.
+pandas,pd.DataFrame(),Create a DataFrame object.
+pandas,df.read_csv(),Read a CSV file into a DataFrame.
+pandas,df.head(),View the first N rows of the DataFrame.
+pandas,df.describe(),Generate descriptive statistics.
+pandas,df.groupby(),Group DataFrame using a mapper or by a Series of columns.
+pandas,df.sample(),Similar to the random choice function for dataframes
+pandas,df.iloc[0],Grabs the first row for the column.
