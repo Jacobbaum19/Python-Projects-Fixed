@@ -43,7 +43,7 @@ second_latest_closing_price = float(day_before_yesterday_date["4. close"])
 difference_of_closing_prices = latest_closing_price - second_latest_closing_price
 print(difference_of_closing_prices)
 # Percent change in closing prices
-percent_change_in_closing_prices = round((difference_of_closing_prices / latest_closing_price) * 100, 2)
+percent_change_in_closing_prices = round((difference_of_closing_prices / second_latest_closing_price) * 100, 2)
 print(percent_change_in_closing_prices)
 
 
@@ -79,5 +79,5 @@ if abs(percent_change_in_closing_prices) > 0.5:
         connection.login(user=my_email, password=password)
         connection.sendmail(
             from_addr=my_email,
-            to_addrs="youremail@gmail.com",
+            to_addrs="Jacobbaum19@gmail.com",
             msg=msg_encoded)
