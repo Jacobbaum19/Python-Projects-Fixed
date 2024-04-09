@@ -79,5 +79,5 @@ if abs(percent_change_in_closing_prices) > 0.5:
         connection.login(user=my_email, password=password)
         connection.sendmail(
             from_addr=my_email,
-            to_addrs="Jacobbaum19@gmail.com",
+            to_addrs="your_email@.com",
             msg=msg_encoded)
