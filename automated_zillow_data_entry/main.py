@@ -6,6 +6,7 @@ import time
 
 # Goal of project: Automate data entry by finding the price, address, and links for places to rent in California
 # that are up to 3k a month 1+ bed and 0+ bath by filling out a Google form.
+# Note, this is a clone of Zillow that does not update...
 
 
 url_form = "https://docs.google.com/forms/d/e/1FAIpQLSfQXEROlEys1iyPyJg6hGMLuFhHeGa9Ti3engoz2O1rVDrSpw/viewform?usp=sf_link"
